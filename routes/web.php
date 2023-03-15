@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
+
+Route::resource('books', \App\Http\Controllers\BookController::class);
+Route::resource('authors', \App\Http\Controllers\AuthorController::class);
