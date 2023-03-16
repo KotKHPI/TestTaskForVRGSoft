@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -13,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('books.books');
+        return view('books.books', ['books' => Book::with('list_of_authors')->paginate(15)]);
     }
 
     /**
@@ -23,7 +24,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.createBook');
     }
 
     /**
@@ -79,6 +80,11 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        session()->flash('status', 'Book "' . $book['name'] . '" was deleted');
+
+        return redirect()->route('books.index');
     }
 }

@@ -16,9 +16,19 @@
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2" href="{{route('home')}}">Home</a>
         <a class="p-2" href="{{route('books.index')}}">Books</a>
+        <a class="p-2" href="{{route('books.create')}}">Add book</a>
         <a class="p-2" href="{{route('authors.index')}}">Authors</a>
     </nav>
 </div>
+
+{{--<div class="container">--}}
+{{--    @if(session('status'))--}}
+{{--        <div class="alert alert-success">--}}
+{{--            {{ session('status') }}--}}
+{{--        </div>--}}
+{{--    @endif--}}
+{{--    @yield('content')--}}
+{{--</div>--}}
 
 @yield('content')
 </body>
