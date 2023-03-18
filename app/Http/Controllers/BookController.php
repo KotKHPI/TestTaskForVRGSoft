@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,19 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        //
+//        dd($request->request->all());
+        $authors = $request->request->all();
+        $validate = $request->validated();
+        dd($authors['author_id']);
+        $book = Book::create($validate);
+
+        $book->save();
+
+        $request->session()->flash('status', 'New book!');
+
+        return redirect()->route('book.index');
     }
 
     /**
